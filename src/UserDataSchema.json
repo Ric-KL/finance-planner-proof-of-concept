@@ -1,0 +1,109 @@
+{
+    "userID": "###",
+    "userData": {
+        "ID|Name|Year": {
+            "income": "###",
+            "savings": "###",
+            "expenses": "###",
+            "taxes" : "###",
+            "netChange": "###",
+            "january": {
+                "income": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "estimatedTax" : "###",
+                "netChage" : "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "february": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "march": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "april": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "may": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "june": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "july": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "august": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "september": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "october": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "november": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            },
+            "december": {
+                "income": "###",
+                "budget": "###",
+                "savings": "###",
+                "totalExpenses": "###",
+                "netChange": "###",
+                "expenses": [{"entryName": "###"}]
+            }
+        }
+    }
+}

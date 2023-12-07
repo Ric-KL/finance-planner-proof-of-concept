@@ -1,0 +1,162 @@
+h5 {
+  margin: 6px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.planner-main-container {
+  display: flex;
+  height: 95vh;
+  width: 95vw;
+  background-color: #434861;
+  border: solid #2D3142 5px;
+}
+
+.planner-sidebar-container {
+  width: 25%;
+  border-right: solid #2D3142 5px
+}
+
+.planner-content-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.planner-content-navbar-container {
+  border-bottom: solid #2D3142 5px;
+  height: 8%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.planner-content-tabs-container {
+  display: flex;
+  border-bottom: solid #2D3142 5px;
+  height: 4%;
+  width: 100%;
+}
+
+.planner-content-userdata-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.planner-content-totals {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 25%;
+  border-right: solid #2D3142 5px;
+}
+
+.planner-content-entries-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.planner-content-totals-monthly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+  border-bottom: solid #2D3142 5px;
+}
+
+.planner-content-totals-yearly {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+}
+
+.planner-refresh-button {
+  position: absolute;
+  height: 40%;
+  width: auto;
+  left: -25%;
+}
+
+.planner-content-totals-yearly-header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.planner-sidebar-actives-container {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.planner-sidebar-archives-container {
+  height: 50%;
+  border-top: solid #2D3142 5px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.planner-sidebar-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pushExpensebutton {
+  height: 100%;
+  width: auto;
+  left: -25%;
+}
+
+.planner-content-entries {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  width: 100%;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.planner-content-entries-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5%;
+  border-top: solid #2D3142 5px;
+}
+
+.planner-sidebar-actives {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  overflow-y: scroll;
+  border-top: solid #2D3142 5px;
+  flex-grow: 0;
+}
+
+.planner-sidebar-new-form {
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-top: solid #2D3142 5px
+}
+
+.planner-sidebar-new-form-input {
+  margin: 10px;
+}

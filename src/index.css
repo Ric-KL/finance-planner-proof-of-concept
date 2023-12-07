@@ -1,0 +1,89 @@
+body {
+  background-color: rgb(61, 61, 61);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.bounds {
+  border: solid red 5px;
+}
+
+.login-container-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 30vw;
+  min-height: 300px;
+  width: 40vw;
+  min-width: 400px;
+  background-color: #434861;
+  border: solid #2D3142 5px;
+  border-radius: 5px;
+}
+
+.login-register-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  height: 70%;
+  width: 100%;
+  margin: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: solid #2D3142 2px;
+}
+
+.login-login-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  height: 70%;
+  width: 100%;
+  margin: 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  border: solid #2D3142 2px;
+}
+
+.login-tabs-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.login-credentials-register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 60%;
+}
+
+.login-register-form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-login-form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-element {
+  margin: 10px;
+  width: 90%;
+  height: 40px;
+  font-size: 1.5rem;
+  border: solid #2D3142 2px;
+}
