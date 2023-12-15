@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; //https://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
 
 export default function LogIn() {
+
     const [loginMode , setLoginMode] = React.useState(0)
     const navigate = useNavigate();
 
@@ -11,10 +12,6 @@ export default function LogIn() {
 
     function toLogin() {
         setLoginMode(1)
-    }
-
-    function simulateLogin() {
-        navigate("/planner")
     }
 
     //Register States
@@ -30,11 +27,9 @@ export default function LogIn() {
 }
 
     async function registerUser() {
-        createJWTKey()
-        const JWTKey = window.localStorage.getItem("JWTKey");
-        const user = {"username" : registerFieldUsername, "password" : registerFieldPassword , "JWTKey" : JWTKey};
+        const user = {"username" : registerFieldUsername, "password" : registerFieldPassword};
         try {
-        const response = await fetch("http://localhost:3000/register" , {
+        const response1 = await fetch("http://localhost:3000/register" , {
             method: "POST",
             body : JSON.stringify(user),
             headers: {
@@ -43,7 +38,7 @@ export default function LogIn() {
         })
         .then((res) => {return res.json()})
         .then((res) => {if (res.success) {
-            window.localStorage.setItem("accessKey" , res.data)
+            window.sessionStorage.setItem("accessKey" , res.data)
             loginUserPassthrough()
 
         }
@@ -70,11 +65,42 @@ export default function LogIn() {
     }
 
     async function loginUser() {
-        const JWTKey = window.localStorage.getItem("JWTKey");
-        const accessKey = window.localStorage.getItem("accessKey");
-        const user = {"username" : loginFieldUsername, "password" : loginFieldPassword , "JWTKey" : JWTKey}
+        let accessKey = "";
+        const user = {"username" : loginFieldUsername, "password" : loginFieldPassword}
+
         try {
-            const response = await fetch("http://localhost:3000/load" , {
+            console.log(user)
+            const response1 = await fetch("http://localhost:3000/login" , {
+                method: "PUT",
+                body : JSON.stringify(user),
+                headers: {
+                    "Content-type" : "application/json; charset=UTF-8"
+                }
+            })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.success == true) {
+                    accessKey = res.data
+                    window.sessionStorage.setItem("accessKey" , JSON.stringify(res.data));
+                    return res
+                }
+                else {
+                    alert("User not found")
+                    return
+                }
+            })
+        }
+
+        catch(e) {
+            console.log("Error", e.stack);
+            console.log("Error", e.name);
+            console.log("Error", e.message)
+            alert("error")
+            return
+        }
+
+        try {
+            const response2 = await fetch("http://localhost:3000/load" , {
             method: "PUT",
             body : JSON.stringify(user),
             headers: new Headers({
@@ -87,7 +113,9 @@ export default function LogIn() {
             console.log(res)
             if (res.success == true) {
                 window.sessionStorage.setItem("user" , JSON.stringify(user));
-                window.localStorage.setItem("userData", JSON.stringify(res.data))
+                if (window.localStorage.getItem("userData") != null) {
+                    window.localStorage.setItem("userData", JSON.stringify(res.data))
+                }
                 navigate("/planner")
             }
             else {
@@ -104,12 +132,11 @@ export default function LogIn() {
     }
 
     async function loginUserPassthrough() {
-        const JWTKey = window.localStorage.getItem("JWTKey");
-        const accessKey = window.localStorage.getItem("accessKey");
-        const user = {"username" : registerFieldUsername, "password" : registerFieldPassword , "JWTKey" : JWTKey}
-        console.log(user)
+        const accessKey = window.sessionStorage.getItem("accessKey");
+        const user = {"username" : registerFieldUsername, "password" : registerFieldPassword}
+
         try {
-            const response = await fetch("http://localhost:3000/load" , {
+            const response2 = await fetch("http://localhost:3000/load" , {
             method: "PUT",
             body : JSON.stringify(user),
             headers: new Headers({
@@ -122,7 +149,9 @@ export default function LogIn() {
             console.log(res)
             if (res.success == true) {
                 window.sessionStorage.setItem("user" , JSON.stringify(user));
-                window.localStorage.setItem("userData", res.data)
+                if (window.localStorage.getItem("userData") != null) {
+                    window.localStorage.setItem("userData", JSON.stringify(res.data))
+                }
                 navigate("/planner")
             }
         })
@@ -132,15 +161,6 @@ export default function LogIn() {
             console.log("Error", e.name);
             console.log("Error", e.message)
             alert("Error in Auth")
-        }
-    }
-
-    //Local Storage State
-    function createJWTKey() {
-        if (window.localStorage.getItem("JWTKey") == null) {
-            const newKey = Math.random().toString(36).slice(2) //source: https://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript
-
-            window.localStorage.setItem("JWTKey" , newKey);
         }
     }
 

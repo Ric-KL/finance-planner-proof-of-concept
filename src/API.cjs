@@ -46,7 +46,7 @@ app.use((req , res , next) => {
 
 app.post("/register" , async function(req , res) {
     try {
-        let {username , password , JWTKey} = req.body;
+        let {username , password} = req.body;
         const user = {username , password }
 
         const [testDupes] = await req.db.query(
@@ -67,7 +67,7 @@ app.post("/register" , async function(req , res) {
           password,
         })
 
-        const accessToken = jwt.sign(user , req.body.JWTKey);
+        const accessToken = jwt.sign(user , process.env.JWT_KEY);
 
     res.json({ success: true, message: 'User successfully created', data: accessToken });
     }
@@ -76,13 +76,43 @@ app.post("/register" , async function(req , res) {
     }
 } )
 
+app.put("/login" , async function(req ,res) {
+  try {
+    console.log(req.body);
+    let {username , password} = req.body;
+    const user = {username , password }
+
+    const [testDupes] = await req.db.query(
+      `SELECT * FROM users WHERE username = :username;`,
+      {
+        username,
+      })
+    
+    console.log(testDupes);
+    
+    if (testDupes.length == 0) {
+      return res.json({ success: false, message: 'Username not found', data: null , code : 409})
+    }
+
+    const accessToken = jwt.sign(user , process.env.JWT_KEY);
+
+res.json({ success: true, message: 'User successfully logged in', data: accessToken });
+}
+catch (e) {
+    console.log("Error", e.stack);
+    console.log("Error", e.name);
+    console.log("Error", e.message)
+    res.json({ success: false, data: null , message : "User not logged in" , code : "409"})
+}
+})
+
 //Authenticate Token Middleware
 function authenticateToken(req , res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) {return res.sendStatus(401)};
 
-  jwt.verify(token , req.body.JWTKey , (err , user) => {
+  jwt.verify(token , process.env.JWT_KEY , (err , user) => {
     if (err) {console.log("error") ; return res.sendStatus(403)}
     req.user = user;
     next()
@@ -132,7 +162,7 @@ app.put("/load" , authenticateToken, async function(req , res) {
 
 //Save Method
 app.put("/save" , async function(req , res) {
-  let {username , password , JWTKey , saveData} = req.body;
+  let {username , password , saveData} = req.body;
 
   try {
     const [testArr] = await req.db.query(
@@ -166,7 +196,7 @@ app.put("/save" , async function(req , res) {
 
 //Update Method
 app.put("/update" , async function(req , res) {
-  let {username , password , JWTKey , saveData} = req.body;
+  let {username , password, saveData} = req.body;
 
   try {
 
@@ -217,7 +247,7 @@ app.put("/update" , async function(req , res) {
 
 //Delete Method
 app.delete("/delete" , async function (req, res) {
-  let {username , password , JWTKey , targetKey} = req.body;
+  let {username , password , targetKey} = req.body;
 
   try {
     let targetID = null;

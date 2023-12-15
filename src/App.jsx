@@ -128,7 +128,8 @@ function App() {
   }, [userData]);
   React.useEffect(() => {
     setUserData(prevObj => {
-      if (prevObj == null) {
+      if (prevObj == null || prevObj == []) {
+        window.localStorage.setItem("userData" , JSON.stringify(pushFirstSheet()))
         return pushFirstSheet()
       }
       else {
@@ -139,9 +140,10 @@ function App() {
 
 
   //State for Currently Loaded Sheet
-  const [currentUserSheet, setCurrentUserSheet] = userData.length &&  React.useState(userData.find((x) => Object.keys(x)[0] == currentUserSheetID )[[currentUserSheetID]] == null ? tempObject : userData.find((x) => Object.keys(x)[0] == currentUserSheetID )[[currentUserSheetID]])
+  const [currentUserSheet, setCurrentUserSheet] = React.useState(userData.length != 0 ? userData.find((x) => Object.keys(x)[0] == currentUserSheetID )[[currentUserSheetID]] : tempObject)
+
   React.useEffect(() => {
-    setCurrentUserSheet(userData.find((x) => Object.keys(x)[0] == currentUserSheetID )[[currentUserSheetID]] == null ? tempObject : userData.find((x) => Object.keys(x)[0] == currentUserSheetID )[[currentUserSheetID]])
+    setCurrentUserSheet(userData.length != 0 ? userData.find((x) => Object.keys(x)[0] == currentUserSheetID )[[currentUserSheetID]] : tempObject)
   },[currentUserSheetID])
 
   //State for User Input Fields
@@ -510,8 +512,7 @@ function App() {
 
   //HTTP Functions
   async function saveSheet(targetData) {
-    const JWTKey = window.localStorage.getItem("JWTKey");
-    const accessKey = window.localStorage.getItem("accessKey");
+    const accessKey = window.sessionStorage.getItem("accessKey");
     const user = JSON.parse(window.sessionStorage.getItem("user"))
     let exportData = {...user , saveData : targetData};
 
@@ -526,8 +527,7 @@ function App() {
   }
 
   async function deleteSheet() {
-    const JWTKey = window.localStorage.getItem("JWTKey");
-    const accessKey = window.localStorage.getItem("accessKey");
+    const accessKey = window.sessionStorage.getItem("accessKey");
     const user = JSON.parse(window.sessionStorage.getItem("user"))
     const targetKey = `${event.target.id}|${event.target.name}`
     let exportData = {...user , targetKey : targetKey};
@@ -543,8 +543,7 @@ function App() {
   }
 
   async function updateSheet() {
-    const JWTKey = window.localStorage.getItem("JWTKey");
-    const accessKey = window.localStorage.getItem("accessKey");
+    const accessKey = window.sessionStorage.getItem("accessKey");
     const user = JSON.parse(window.sessionStorage.getItem("user"))
     let exportData = {...user , saveData : {[currentUserSheetID] : {...currentUserSheet}}};
 
